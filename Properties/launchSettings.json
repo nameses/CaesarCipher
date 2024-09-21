@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "СaesarCipher (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "СaesarCipher (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
