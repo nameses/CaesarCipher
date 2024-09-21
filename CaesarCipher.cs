@@ -2,22 +2,35 @@
 
 namespace СaesarCipher
 {
-    public class CaesarCipher
+    public static class CaesarCipher
     {
-        private const string _ukrainianAlphabet = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
-        private const string _englishAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        private static readonly string _ukrainianAlphabet = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
+        private static readonly string _englishAlphabet = "abcdefghijklmnopqrstuvwxyz";
 
-        public string Encrypt(string input, int shift)
+        public static string Encrypt(string input, int shift)
         {
-            return ProcessText(input, shift);
+            if (!validateShift(shift))
+            {
+                return string.Empty;
+            }
+            return processText(input, shift);
         }
 
-        public string Decrypt(string input, int shift)
+        public static string Decrypt(string input, int shift)
         {
-            return ProcessText(input, -shift);
+            if (!validateShift(shift))
+            {
+                return string.Empty;
+            }
+            return processText(input, -shift);
         }
 
-        private string ProcessText(string input, int shift)
+        private static bool validateShift(int shift)
+        {
+            return shift > 0 && shift != _ukrainianAlphabet.Length && shift != _englishAlphabet.Length;
+        }
+
+        private static string processText(string input, int shift)
         {
             StringBuilder result = new StringBuilder(input.Length);
 
@@ -30,7 +43,7 @@ namespace СaesarCipher
                     continue;
                 }
 
-                string alphabet = GetAlphabet(currentChar);
+                string alphabet = getAlphabet(currentChar);
                 //не знайома абетка
                 if (string.IsNullOrEmpty(alphabet))
                 {
@@ -44,7 +57,7 @@ namespace СaesarCipher
 
                 int originalPosition = alphabet.IndexOf(lowerCurrentChar);
                 // символи не в алфавіті залишаємо без змін
-                if (originalPosition != -1)
+                if (originalPosition == -1)
                 {
                     result.Append(currentChar);
                     continue;
@@ -64,7 +77,7 @@ namespace СaesarCipher
         }
 
         // Метод для визначення алфавіту залежно від символу
-        private string GetAlphabet(char c)
+        private static string getAlphabet(char c)
         {
             if (_ukrainianAlphabet.Contains(char.ToLower(c))) return _ukrainianAlphabet;
             if (_englishAlphabet.Contains(char.ToLower(c))) return _englishAlphabet;
