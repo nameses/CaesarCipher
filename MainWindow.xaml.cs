@@ -51,6 +51,7 @@ namespace СaesarCipher
 
             OriginalTextBox.SetValue(TextBox.TextProperty, stringFileContent);
         }
+
         /// <summary>
         /// Read file from FilePicker and return its content in string
         /// </summary>
