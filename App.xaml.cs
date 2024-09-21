@@ -30,6 +30,7 @@ namespace СaesarCipher
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             Window = new MainWindow();
+            Window.Title = "Caesar Cipher";
             Window.Activate();
         }
     }
