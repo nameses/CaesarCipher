@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace СaesarCipher
 {
@@ -27,7 +28,7 @@ namespace СaesarCipher
 
         private static bool validateShift(int shift)
         {
-            return shift > 0 && shift != _ukrainianAlphabet.Length && shift != _englishAlphabet.Length;
+            return shift > 0 && shift < (Math.Min(_ukrainianAlphabet.Length, _englishAlphabet.Length));
         }
 
         private static string processText(string input, int shift)
